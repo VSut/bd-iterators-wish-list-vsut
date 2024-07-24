@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class WishList {
 
@@ -9,6 +11,11 @@ public class WishList {
      * @return the wishList with the newly added item
      */
     public List<WishListItem> addLast(List<WishListItem> wishList, WishListItem item) {
+        ListIterator<WishListItem> listItemListIterator = wishList.listIterator();
+        while (listItemListIterator.hasNext()){
+            listItemListIterator.next();
+        }
+        listItemListIterator.add(item);
         return wishList;
     }
 
@@ -20,6 +27,14 @@ public class WishList {
      * @return the wishList with the newly added item
      */
     public List<WishListItem> addAtIndex(List<WishListItem> wishList, WishListItem item, int index) {
+        if (index >= wishList.size()) {
+            return addLast(wishList,item);
+        }
+        ListIterator<WishListItem> listItemListIterator = wishList.listIterator();
+        for(int i = 0; i< index; i++){
+            listItemListIterator.next();
+        }
+        listItemListIterator.add(item);
         return wishList;
     }
 
@@ -29,6 +44,12 @@ public class WishList {
      * @return the empty wishList
      */
     public List<WishListItem> removeAll(List<WishListItem> wishList) {
+        ListIterator<WishListItem> listItemListIterator = wishList.listIterator();
+
+        while (listItemListIterator.hasNext()){
+            listItemListIterator.next();
+            listItemListIterator.remove();
+        }
         return wishList;
     }
 
@@ -39,6 +60,11 @@ public class WishList {
      * @return the wishList with the removed item
      */
     public List<WishListItem> removeItem(List<WishListItem> wishList, WishListItem item) {
+        for(ListIterator<WishListItem> listItemListIterator = wishList.listIterator(); listItemListIterator.hasNext();){
+            if(listItemListIterator.next() == item){
+                listItemListIterator.remove();
+            }
+        }
         return wishList;
     }
 }
